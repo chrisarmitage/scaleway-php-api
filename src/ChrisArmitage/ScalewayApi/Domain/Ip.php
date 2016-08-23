@@ -13,7 +13,10 @@ class Ip
     }
 
     static public function makeFromIpJson($ipJson) {
-        return new static($ipJson->id, $ipJson->address);
+        return new static(
+            isset($ipJson->id) ? $ipJson->id : null,
+            isset($ipJson->address) ? $ipJson->address : null
+        );
     }
 
     static public function makeFromIpAddress($ipAddress) {
