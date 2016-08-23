@@ -4,6 +4,7 @@ namespace ChrisArmitage\ScalewayApi\Domain;
 
 class Server
 {
+    protected $id;
     protected $state;
 
     /**
@@ -15,16 +16,24 @@ class Server
     protected $commercialType;
     protected $volumes = [];
 
-    protected function __construct($serverJson) {
-        $this->state = $serverJson->state;
-        $this->image = Image::makeFromImageJson($serverJson->image);
-        $this->publicIp = Ip::makeFromIpJson($serverJson->public_ip);
-        $this->privateIp = Ip::makeFromIpAddress($serverJson->private_ip);
-        $this->commercialType = $serverJson->commercial_type;
+    protected function __construct($server) {
+        $this->id = $server->id;
+        $this->state = $server->state;
+        $this->image = Image::makeFromImageJson($server->image);
+        $this->publicIp = Ip::makeFromIpJson($server->public_ip);
+        $this->privateIp = Ip::makeFromIpAddress($server->private_ip);
+        $this->commercialType = $server->commercial_type;
     }
 
     static public function makeFromServerJson($serverJson) {
         return new static($serverJson);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId() {
+        return $this->id;
     }
 
     /**
