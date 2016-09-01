@@ -42,6 +42,23 @@ class Servers
         $response = $this->gateway->getServer($serverId);
         
         return Server::makeFromServerJson($response->server);
+    }
 
+    public function createServer($name, $organizationId, $imageId, $commercialType) {
+        $response = $this->gateway->createServer($name, $organizationId, $imageId, $commercialType);
+
+        return Server::makeFromServerJson($response->server);
+    }
+
+    public function deleteServer($serverId) {
+        $response = $this->gateway->deleteServer($serverId);
+
+        return $response;
+    }
+
+    public function setAction($serverId, $action) {
+        $response = $this->gateway->setAction($serverId, $action);
+
+        return $response;
     }
 }
