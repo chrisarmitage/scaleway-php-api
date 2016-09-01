@@ -25,6 +25,10 @@ class Server
         $this->commercialType = $server->commercial_type;
     }
 
+    /**
+     * @param $serverJson
+     * @return static
+     */
     static public function makeFromServerJson($serverJson) {
         return new static($serverJson);
     }
