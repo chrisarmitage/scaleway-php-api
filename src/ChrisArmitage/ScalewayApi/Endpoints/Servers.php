@@ -4,6 +4,7 @@ namespace ChrisArmitage\ScalewayApi\Endpoints;
 
 use ChrisArmitage\ScalewayApi\Client;
 use ChrisArmitage\ScalewayApi\Domain\Server;
+use ChrisArmitage\ScalewayApi\Domain\Task;
 use ChrisArmitage\ScalewayApi\WebService\Servers\WebServiceGateway;
 
 class Servers
@@ -80,12 +81,12 @@ class Servers
     /**
      * @param $serverId
      * @param $action
-     * @return mixed
+     * @return Task
      * @throws \Exception
      */
     public function setAction($serverId, $action) {
         $response = $this->gateway->setAction($serverId, $action);
 
-        return $response;
+        return Task::makeFromTaskJson($response->task);
     }
 }
