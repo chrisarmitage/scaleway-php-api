@@ -20,9 +20,8 @@ class WebServiceGateway
             $this->client->setResource('servers')
                 ->setMethod('GET');
             $response = $this->client->call();
-
         } catch (\Exception $e) {
-            throw $e;
+            throw new GeneralException('GetServers call failed', 0, $e);
         }
 
         return $response;
@@ -33,9 +32,8 @@ class WebServiceGateway
             $this->client->setResource("servers/{$serverId}")
                 ->setMethod('GET');
             $response = $this->client->call();
-
         } catch (\Exception $e) {
-            throw $e;
+            throw new GeneralException('GetServer call failed', 0, $e);
         }
 
         return $response;
@@ -47,15 +45,15 @@ class WebServiceGateway
                 ->setMethod('POST')
                 ->setParameters(
                     [
-                        "name" => $name,
-                        "organization" => $organizationId,
-                        "image" => $imageId,
+                        'name'            => $name,
+                        'organization'    => $organizationId,
+                        'image'           => $imageId,
                         'commercial_type' => $commercialType,
                     ]
                 );
             $response = $this->client->call();
         } catch (\Exception $e) {
-            throw $e;
+            throw new GeneralException('CreateServer call failed', 0, $e);
         }
 
         return $response;
@@ -66,9 +64,8 @@ class WebServiceGateway
             $this->client->setResource("servers/{$serverId}")
                 ->setMethod('DELETE');
             $response = $this->client->call();
-
         } catch (\Exception $e) {
-            throw $e;
+            throw new GeneralException('DeleteServer call failed', 0, $e);
         }
 
         return $response;
@@ -85,7 +82,7 @@ class WebServiceGateway
                 );
             $response = $this->client->call();
         } catch (\Exception $e) {
-            throw $e;
+            throw new GeneralException('SetAction call failed', 0, $e);
         }
 
         return $response;
