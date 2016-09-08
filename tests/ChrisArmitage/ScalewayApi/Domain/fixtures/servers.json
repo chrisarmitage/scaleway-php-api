@@ -1,0 +1,175 @@
+{
+  "servers": [
+    {
+      "state_detail": "",
+      "image": {
+        "default_bootscript": {
+          "kernel": "http://169.254.42.24/kernel/x86_64-4.5.7-std-2/vmlinuz-4.5.7-std-2",
+          "initrd": "http://169.254.42.24/initrd/initrd-Linux-x86_64-v3.11.1.gz",
+          "default": false,
+          "bootcmdargs": "LINUX_COMMON ip=:::::eth0: boot=local",
+          "architecture": "x86_64",
+          "title": "x86_64 4.5.7 std #2 (latest)",
+          "dtb": "",
+          "organization": "11111111-1111-4111-8111-111111111111",
+          "id": "1db87849-8de5-4214-97ab-6bc3aba3056d",
+          "public": false
+        },
+        "creation_date": "2016-07-01T12:57:31.035509+00:00",
+        "name": "CentOS 7 (beta)",
+        "modification_date": "2016-07-01T14:24:45.695665+00:00",
+        "organization": "abaeb1aa-760b-4391-aeab-c0622be90abf",
+        "extra_volumes": "[]",
+        "arch": "x86_64",
+        "id": "00000000-0000-0000-0000-imageid00000",
+        "root_volume": {
+          "size": 50000000000,
+          "id": "00000000-0000-0000-0000-rootvolumeid",
+          "volume_type": "l_ssd",
+          "name": "x86_64-centos-latest-2016-07-01_12:51"
+        },
+        "public": true
+      },
+      "creation_date": "2016-08-21T13:52:36.473898+00:00",
+      "public_ip": null,
+      "private_ip": null,
+      "id": "00000000-0000-0000-0000-serverid0000",
+      "dynamic_ip_required": true,
+      "modification_date": "2016-08-21T13:52:36.815048+00:00",
+      "enable_ipv6": false,
+      "hostname": "test-hostname-00",
+      "state": "stopped",
+      "bootscript": {
+        "kernel": "http://169.254.42.24/kernel/x86_64-4.5.7-std-2/vmlinuz-4.5.7-std-2",
+        "initrd": "http://169.254.42.24/initrd/initrd-Linux-x86_64-v3.11.1.gz",
+        "default": false,
+        "bootcmdargs": "LINUX_COMMON ip=:::::eth0: boot=local",
+        "architecture": "x86_64",
+        "title": "x86_64 4.5.7 std #2 (latest)",
+        "dtb": "",
+        "organization": "11111111-1111-4111-8111-111111111111",
+        "id": "1db87849-8de5-4214-97ab-6bc3aba3056d",
+        "public": false
+      },
+      "location": null,
+      "ipv6": null,
+      "commercial_type": "VC1S",
+      "tags": [],
+      "arch": "x86_64",
+      "extra_networks": [],
+      "name": "test-hostname",
+      "volumes": {
+        "0": {
+          "size": 50000000000,
+          "name": "x86_64-centos-latest-2016-07-01_12:51",
+          "modification_date": "2016-08-11T07:46:51.581273+00:00",
+          "organization": "c2a05f1c-cbd5-4409-9835-2e7b1e22af32",
+          "export_uri": null,
+          "creation_date": "2016-08-11T07:46:51.581273+00:00",
+          "id": "00000000-0000-0000-0000-volumeid0000",
+          "volume_type": "l_ssd",
+          "server": {
+            "id": "00000000-0000-0000-0000-serverid0000",
+            "name": "test-hostname"
+          }
+        }
+      },
+      "security_group": {
+        "id": "00000000-0000-0000-0000-securityid00",
+        "name": "Default security group"
+      },
+      "organization": "00000000-0000-0000-0000-organization"
+    },
+    {
+      "state_detail": "booted",
+      "image": {
+        "default_bootscript": {
+          "kernel": "http://169.254.42.24/kernel/x86_64-4.5.7-std-2/vmlinuz-4.5.7-std-2",
+          "initrd": "http://169.254.42.24/initrd/initrd-Linux-x86_64-v3.11.1.gz",
+          "default": false,
+          "bootcmdargs": "LINUX_COMMON ip=:::::eth0: boot=local",
+          "architecture": "x86_64",
+          "title": "x86_64 4.5.7 std #2 (latest)",
+          "dtb": "",
+          "organization": "11111111-1111-4111-8111-111111111111",
+          "id": "1db87849-8de5-4214-97ab-6bc3aba3056d",
+          "public": false
+        },
+        "creation_date": "2016-07-01T12:57:31.035509+00:00",
+        "name": "CentOS 7 (beta)",
+        "modification_date": "2016-07-01T14:24:45.695665+00:00",
+        "organization": "abaeb1aa-760b-4391-aeab-c0622be90abf",
+        "extra_volumes": "[]",
+        "arch": "x86_64",
+        "id": "00000000-0000-0000-0000-imageid00000",
+        "root_volume": {
+          "size": 50000000000,
+          "id": "00000000-0000-0000-0000-rootvolumeid",
+          "volume_type": "l_ssd",
+          "name": "x86_64-centos-latest-2016-07-01_12:51"
+        },
+        "public": true
+      },
+      "creation_date": "2016-08-11T07:46:51.581273+00:00",
+      "public_ip": {
+        "dynamic": false,
+        "id": "00000000-0000-0000-0000-publicipid00",
+        "address": "163.172.111.222"
+      },
+      "private_ip": "10.2.111.222",
+      "id": "00000000-0000-0000-0000-serverid0001",
+      "dynamic_ip_required": false,
+      "modification_date": "2016-08-11T07:48:07.252491+00:00",
+      "enable_ipv6": false,
+      "hostname": "test-hostname-01",
+      "state": "running",
+      "bootscript": {
+        "kernel": "http://169.254.42.24/kernel/x86_64-4.5.7-std-2/vmlinuz-4.5.7-std-2",
+        "initrd": "http://169.254.42.24/initrd/initrd-Linux-x86_64-v3.11.1.gz",
+        "default": false,
+        "bootcmdargs": "LINUX_COMMON ip=:::::eth0: boot=local",
+        "architecture": "x86_64",
+        "title": "x86_64 4.5.7 std #2 (latest)",
+        "dtb": "",
+        "organization": "11111111-1111-4111-8111-111111111111",
+        "id": "1db87849-8de5-4214-97ab-6bc3aba3056d",
+        "public": false
+      },
+      "location": {
+        "platform_id": "1",
+        "hypervisor_id": "2",
+        "node_id": "3",
+        "cluster_id": "4"
+      },
+      "ipv6": null,
+      "commercial_type": "VC1S",
+      "tags": [
+      ],
+      "arch": "x86_64",
+      "extra_networks": [
+      ],
+      "name": "test-hostname",
+      "volumes": {
+        "0": {
+          "size": 50000000000,
+          "name": "x86_64-centos-latest-2016-07-01_12:51",
+          "modification_date": "2016-08-11T07:46:51.581273+00:00",
+          "organization": "c2a05f1c-cbd5-4409-9835-2e7b1e22af32",
+          "export_uri": "device://dev/vda",
+          "creation_date": "2016-08-11T07:46:51.581273+00:00",
+          "id": "00000000-0000-0000-0000-volumeid0001",
+          "volume_type": "l_ssd",
+          "server": {
+            "id": "00000000-0000-0000-0000-serverid0001",
+            "name": "test-hostname"
+          }
+        }
+      },
+      "security_group": {
+        "id": "00000000-0000-0000-0000-securityid00",
+        "name": "Default security group"
+      },
+      "organization": "00000000-0000-0000-0000-organization"
+    }
+  ]
+}
