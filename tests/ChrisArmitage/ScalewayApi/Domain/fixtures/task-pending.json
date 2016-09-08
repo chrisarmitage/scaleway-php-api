@@ -1,0 +1,11 @@
+{
+  "task": {
+    "status": "pending",
+    "description": "server_batch_poweron",
+    "terminated_at": null,
+    "href_from": "/servers/00000000-0000-0000-0000-serverid0000/action",
+    "progress": 0,
+    "started_at": "2016-08-21T14:05:48.278983+00:00",
+    "id": "00000000-0000-0000-0000-taskid000000"
+  }
+}
