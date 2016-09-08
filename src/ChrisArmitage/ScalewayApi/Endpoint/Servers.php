@@ -1,6 +1,6 @@
 <?php
 
-namespace ChrisArmitage\ScalewayApi\Endpoints;
+namespace ChrisArmitage\ScalewayApi\Endpoint;
 
 use ChrisArmitage\ScalewayApi\Client;
 use ChrisArmitage\ScalewayApi\Domain\Server;
