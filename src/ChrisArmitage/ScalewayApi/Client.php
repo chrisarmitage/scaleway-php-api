@@ -2,17 +2,19 @@
 
 namespace ChrisArmitage\ScalewayApi;
 
-use GuzzleHttp\Client as Guzzle;
+use GuzzleHttp\Client as GuzzleClient;
 
 class Client
 {
+    protected $guzzle;
     protected $endpoint;
     protected $token;
     protected $resource;
     protected $method;
     protected $parameters = [];
 
-    public function __construct($endpoint, $token) {
+    public function __construct(GuzzleClient $guzzle, $endpoint, $token) {
+        $this->guzzle = $guzzle;
         $this->endpoint = $endpoint;
         $this->token = $token;
     }
@@ -33,8 +35,6 @@ class Client
     }
 
     public function call() {
-        $guzzle = new Guzzle;
-
         $options = [
             'headers' => [
                 'X-Auth-Token' => $this->token,
@@ -43,14 +43,14 @@ class Client
 
         switch ($this->method) {
             case 'GET':
-                $response = $guzzle->get("{$this->endpoint}{$this->resource}", $options);
+                $response = $this->guzzle->get("{$this->endpoint}{$this->resource}", $options);
                 break;
             case 'POST':
                 $options['json'] = $this->parameters;
-                $response = $guzzle->post("{$this->endpoint}{$this->resource}", $options);
+                $response = $this->guzzle->post("{$this->endpoint}{$this->resource}", $options);
                 break;
             case 'DELETE':
-                $response = $guzzle->delete("{$this->endpoint}{$this->resource}", $options);
+                $response = $this->guzzle->delete("{$this->endpoint}{$this->resource}", $options);
                 break;
             default:
                 throw new \RuntimeException('No valid method set');

@@ -9,7 +9,7 @@ Not production ready
 ```php
 use ChrisArmitage\ScalewayApi as Api;
 
-$client = new Api\Client('https://api.scaleway.com/', 'youracce-ssto-ken0-0000-000000000000');
+$client = new Api\Client(new GuzzleHttp\Client(), 'https://api.scaleway.com/', 'youracce-ssto-ken0-0000-000000000000');
 $gateway = new Api\WebService\Servers\WebServiceGateway($client);
 $endpoint = new Api\Endpoints\Servers($gateway);
 
