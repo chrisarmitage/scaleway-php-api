@@ -81,4 +81,19 @@ class ServersTest extends TestCase
 
         self::assertInstanceOf(Task::class, $collection);
     }
+
+    public function testGetUserDataReturnsAString() {
+        $gateway = M::mock(WebServiceGateway::class)
+            ->shouldReceive('getUserData')
+            ->once()
+            ->with('00000000-0000-0000-0000-serverid0000', 'key')
+            ->andReturn('KEY value')
+            ->getMock();
+
+        $endpoint = new Servers($gateway);
+
+        $userData = $endpoint->getUserData('00000000-0000-0000-0000-serverid0000', 'key');
+
+        self::assertTrue(is_string($userData));
+    }
 }

@@ -56,6 +56,6 @@ class Client
                 throw new \RuntimeException('No valid method set');
         }
 
-        return json_decode($response->getBody()->getContents());
+        return $response->getBody()->getContents();
     }
 }

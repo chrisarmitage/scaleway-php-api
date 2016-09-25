@@ -1,7 +1,6 @@
 <?php
 
 use ChrisArmitage\ScalewayApi\Client;
-use ChrisArmitage\ScalewayApi\WebService\Servers\GeneralException;
 use ChrisArmitage\ScalewayApi\WebService\Servers\WebServiceGateway;
 use Mockery as M;
 use PHPUnit\Framework\TestCase;
@@ -26,7 +25,36 @@ class WebServiceGatewayTest extends TestCase
 
         $response = $gateway->getServers();
 
-        self::assertEquals('{json: true}', $response);
+        self::assertEquals(true, $response->json);
+    }
+
+    /**
+     * @param $method
+     * @param $resource
+     * @param $parameters
+     * @return Client
+     */
+    protected function getMockClient($method, $resource, $parameters, $response = '{"json": true}') {
+        $mockClient = M::mock(Client::class);
+        $mockClient->shouldReceive('setResource')
+            ->once()
+            ->with($resource)
+            ->andReturnSelf();
+        $mockClient->shouldReceive('setMethod')
+            ->once()
+            ->with($method)
+            ->andReturnSelf();
+        if ($parameters !== null) {
+            $mockClient->shouldReceive('setParameters')
+                ->once()
+                ->with($parameters)
+                ->andReturnSelf();
+        }
+        $mockClient->shouldReceive('call')
+            ->once()
+            ->andReturn($response);
+
+        return $mockClient;
     }
 
     /**
@@ -46,6 +74,36 @@ class WebServiceGatewayTest extends TestCase
         $gateway->getServers();
     }
 
+    /**
+     * @param $method
+     * @param $resource
+     * @param $parameters
+     * @param Exception $exception
+     * @return Client
+     */
+    protected function getMockExceptionClient($method, $resource, $parameters, \Exception $exception) {
+        $mockClient = M::mock(Client::class);
+        $mockClient->shouldReceive('setResource')
+            ->once()
+            ->with($resource)
+            ->andReturnSelf();
+        $mockClient->shouldReceive('setMethod')
+            ->once()
+            ->with($method)
+            ->andReturnSelf();
+        if ($parameters !== null) {
+            $mockClient->shouldReceive('setParameters')
+                ->once()
+                ->with($parameters)
+                ->andReturnSelf();
+        }
+        $mockClient->shouldReceive('call')
+            ->once()
+            ->andThrow($exception);
+
+        return $mockClient;
+    }
+
     public function testReturnsResponseOnSuccessfulGetServerCall()
     {
         $gateway = new WebServiceGateway(
@@ -58,7 +116,7 @@ class WebServiceGatewayTest extends TestCase
 
         $response = $gateway->getServer('serverId');
 
-        self::assertEquals('{json: true}', $response);
+        self::assertEquals(true, $response->json);
     }
 
     /**
@@ -95,7 +153,7 @@ class WebServiceGatewayTest extends TestCase
 
         $response = $gateway->createServer('serverName', 'organizationId', 'imageId', 'commercialType');
 
-        self::assertEquals('{json: true}', $response);
+        self::assertEquals(true, $response->json);
     }
 
     /**
@@ -132,7 +190,7 @@ class WebServiceGatewayTest extends TestCase
 
         $response = $gateway->deleteServer('serverId');
 
-        self::assertEquals('{json: true}', $response);
+        self::assertEquals(true, $response->json);
     }
 
     /**
@@ -166,7 +224,7 @@ class WebServiceGatewayTest extends TestCase
 
         $response = $gateway->setAction('serverId', 'actionName');
 
-        self::assertEquals('{json: true}', $response);
+        self::assertEquals(true, $response->json);
     }
 
     /**
@@ -188,52 +246,37 @@ class WebServiceGatewayTest extends TestCase
         $gateway->setAction('serverId', 'actionName');
     }
 
-    protected function getMockClient($method, $resource, $parameters)
+    public function testReturnsResponseOnSuccessfulGetUserDataCall()
     {
-        $mockClient = M::mock(Client::class);
-        $mockClient->shouldReceive('setResource')
-            ->once()
-            ->with($resource)
-            ->andReturnSelf();
-        $mockClient->shouldReceive('setMethod')
-            ->once()
-            ->with($method)
-            ->andReturnSelf();
-        if ($parameters !== null) {
-            $mockClient->shouldReceive('setParameters')
-                ->once()
-                ->with($parameters)
-                ->andReturnSelf();
-        }
-        $mockClient->shouldReceive('call')
-            ->once()
-            ->andReturn('{json: true}');
+        $gateway = new WebServiceGateway(
+            $this->getMockClient(
+                'GET',
+                'servers/serverId/user_data/key',
+                null,
+                'KEY value'
+            )
+        );
 
-        return $mockClient;
+        $response = $gateway->getUserData('serverId', 'key');
+
+        self::assertEquals('KEY value', $response);
     }
 
-    protected function getMockExceptionClient($method, $resource, $parameters, \Exception $exception)
+    /**
+     * @expectedException ChrisArmitage\ScalewayApi\WebService\Servers\GeneralException
+     */
+    public function testThrowsExceptionOnFailedGetUserDataCall()
     {
-        $mockClient = M::mock(Client::class);
-        $mockClient->shouldReceive('setResource')
-            ->once()
-            ->with($resource)
-            ->andReturnSelf();
-        $mockClient->shouldReceive('setMethod')
-            ->once()
-            ->with($method)
-            ->andReturnSelf();
-        if ($parameters !== null) {
-            $mockClient->shouldReceive('setParameters')
-                ->once()
-                ->with($parameters)
-                ->andReturnSelf();
-        }
-        $mockClient->shouldReceive('call')
-            ->once()
-            ->andThrow($exception);
+        $gateway = new WebServiceGateway(
+            $this->getMockExceptionClient(
+                'GET',
+                'servers/serverId/user_data/key',
+                null,
+                new \Exception()
+            )
+        );
 
-        return $mockClient;
+        $gateway->getUserData('serverId', 'key');
     }
 
 
