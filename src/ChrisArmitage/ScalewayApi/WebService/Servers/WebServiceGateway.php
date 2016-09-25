@@ -24,7 +24,7 @@ class WebServiceGateway
             throw new GeneralException('GetServers call failed', 0, $e);
         }
 
-        return $response;
+        return json_decode($response);
     }
 
     public function getServer($serverId) {
@@ -36,7 +36,7 @@ class WebServiceGateway
             throw new GeneralException('GetServer call failed', 0, $e);
         }
 
-        return $response;
+        return json_decode($response);
     }
 
     public function createServer($name, $organizationId, $imageId, $commercialType) {
@@ -56,7 +56,7 @@ class WebServiceGateway
             throw new GeneralException('CreateServer call failed', 0, $e);
         }
 
-        return $response;
+        return json_decode($response);
     }
 
     public function deleteServer($serverId) {
@@ -68,7 +68,7 @@ class WebServiceGateway
             throw new GeneralException('DeleteServer call failed', 0, $e);
         }
 
-        return $response;
+        return json_decode($response);
     }
 
     public function setAction($serverId, $action) {
@@ -83,6 +83,18 @@ class WebServiceGateway
             $response = $this->client->call();
         } catch (\Exception $e) {
             throw new GeneralException('SetAction call failed', 0, $e);
+        }
+
+        return json_decode($response);
+    }
+
+    public function getUserData($serverId, $key) {
+        try {
+            $this->client->setResource("servers/{$serverId}/user_data/{$key}")
+                ->setMethod('GET');
+            $response = $this->client->call();
+        } catch (\Exception $e) {
+            throw new GeneralException('GetUserData call failed', 0, $e);
         }
 
         return $response;

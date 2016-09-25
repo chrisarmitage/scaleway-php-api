@@ -89,4 +89,16 @@ class Servers
 
         return Task::makeFromTaskJson($response->task);
     }
+
+    /**
+     * @param $serverId
+     * @param $key
+     * @return string
+     * @throws \ChrisArmitage\ScalewayApi\WebService\Servers\GeneralException
+     */
+    public function getUserData($serverId, $key) {
+        $response = $this->gateway->getUserData($serverId, $key);
+
+        return $response;
+    }
 }
